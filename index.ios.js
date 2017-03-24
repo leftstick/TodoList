@@ -14,4 +14,4 @@ const Entry = StackNavigator({
     }
 });
 
-AppRegistry.registerComponent('TheTrial', () => Entry);
+AppRegistry.registerComponent('TodoList', () => Entry);

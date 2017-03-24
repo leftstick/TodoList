@@ -1,4 +1,4 @@
-package com.thetrial;
+package com.todolist;
 
 import android.app.Application;
 
