@@ -8,10 +8,11 @@
   "dependencies": {
     "react": "15.4.2",
     "react-native": "0.42.3",
+    "react-native-checkbox": "^1.1.0",
     "react-navigation": "^1.0.0-beta.7"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.0",
+    "babel-eslint": "^7.2.1",
     "babel-preset-react-native": "1.9.1",
     "eslint": "^3.18.0",
     "eslint-plugin-react": "^6.10.3",

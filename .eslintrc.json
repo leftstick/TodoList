@@ -13,8 +13,8 @@
     },
     "env": {
         "shared-node-browser": false,
-        "browser": false,
-        "commonjs": false,
+        "browser": true,
+        "commonjs": true,
         "node": false,
         "es6": true
     },
