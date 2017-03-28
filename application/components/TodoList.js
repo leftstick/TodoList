@@ -3,6 +3,7 @@ import {StyleSheet, View, ActivityIndicator, ListView, Button} from 'react-nativ
 
 import CheckBox from 'react-native-checkbox';
 
+
 export class TodoListComponent extends React.Component {
 
     constructor(props) {
@@ -12,36 +13,34 @@ export class TodoListComponent extends React.Component {
         });
     }
 
+    _onItemSelect(todo) {
+        this.props.onTodoCompleted(todo);
+    }
+
     _listItem(rowData) {
         return (<View style={ styles.item }>
-                  <CheckBox labelStyle={ styles.itemLabel } label={ rowData.title } checked={ rowData.completed } onChange={ (checked) => console.log('I am checked', checked) } />
+                  <CheckBox labelStyle={ styles.itemLabel } label={ rowData.title } checked={ rowData.completed } onChange={ () => this._onItemSelect(rowData) } />
                 </View>);
     }
 
-    _listFooter() {
-        if (this.props.loading) {
-            return;
-        }
-        return (
-            <View style={ styles.footer }>
-              <View style={ styles.footerFilter }>
-                <Button onPress={ () => {
-                                  } } title='All' accessibilityLabel='Select All' />
-                <Button onPress={ () => {
-                                  } } title='Active' accessibilityLabel='Select Active tasks' />
-                <Button onPress={ () => {
-                                  } } title='Completed' accessibilityLabel='Select Completed tasks' />
-              </View>
-            </View>);
+    _getListWithFilter() {
+        const {filter} = this.props;
+        return this.ds.cloneWithRows(this.props.list.filter(t => {
+            if (filter === 'all') {
+                return true;
+            }
+            if (filter === 'active') {
+                return !t.completed;
+            }
+            return t.completed;
+        }));
     }
 
     render() {
-        const listDS = this.ds.cloneWithRows(this.props.list);
-
         return (
             <View style={ styles.view }>
               <ActivityIndicator animating={ this.props.loading } color='#000' />
-              <ListView dataSource={ listDS } renderRow={ this._listItem } enableEmptySections={ true } renderFooter={ this._listFooter.bind(this) } />
+              <ListView dataSource={ this._getListWithFilter() } renderRow={ this._listItem.bind(this) } enableEmptySections={ true } />
             </View>
             );
     }
@@ -49,7 +48,9 @@ export class TodoListComponent extends React.Component {
 
 TodoListComponent.propTypes = {
     loading: React.PropTypes.bool.isRequired,
-    list: React.PropTypes.array.isRequired
+    list: React.PropTypes.array.isRequired,
+    filter: React.PropTypes.string.isRequired,
+    onTodoCompleted: React.PropTypes.func.isRequired
 };
 
 
@@ -81,10 +82,5 @@ const styles = StyleSheet.create({
     footerFilter: {
         flex: 0,
         flexDirection: 'row'
-    },
-    footerFilterBtn: {
-        width: 200,
-        paddingLeft: 3,
-        paddingRight: 3
     }
 });
