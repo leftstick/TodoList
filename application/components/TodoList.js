@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, ActivityIndicator, ListView} from 'react-native';
+import autobind from 'autobind-decorator';
 
 import CheckBox from 'react-native-checkbox';
 import Swipeout from 'react-native-swipe-out';
@@ -34,10 +35,11 @@ export class TodoListComponent extends React.Component {
         }];
     }
 
+    @autobind
     _listItem(rowData) {
 
         return (
-            <Swipeout right={ this._getItemRightMenu(rowData) } backgroundColor='transparent'>
+            <Swipeout autoClose={ true } right={ this._getItemRightMenu(rowData) } backgroundColor='transparent'>
               <View style={ styles.item }>
                 <CheckBox labelStyle={ styles.itemLabel } label={ rowData.title } checked={ rowData.completed } onChange={ () => this._onItemSelect(rowData) } />
               </View>
@@ -62,7 +64,7 @@ export class TodoListComponent extends React.Component {
         return (
             <View style={ styles.view }>
               <ActivityIndicator animating={ this.props.loading } color='#000' />
-              <ListView dataSource={ this._getListWithFilter() } renderRow={ this._listItem.bind(this) } enableEmptySections={ true } />
+              <ListView dataSource={ this._getListWithFilter() } renderRow={ this._listItem } enableEmptySections={ true } />
             </View>
             );
     }

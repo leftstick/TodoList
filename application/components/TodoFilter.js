@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text} from 'react-native';
+import autobind from 'autobind-decorator';
 
 import Tabs from 'react-native-tabs';
 
@@ -13,6 +14,7 @@ export class TodoFilterComponent extends React.Component {
         };
     }
 
+    @autobind
     _onSelect(el) {
         this.setState({
             page: el.props.name
@@ -25,7 +27,7 @@ export class TodoFilterComponent extends React.Component {
             return false;
         }
         return (
-            <Tabs selected={ this.state.page } style={ styles.tabs } selectedStyle={ styles.selected } onSelect={ this._onSelect.bind(this) }>
+            <Tabs selected={ this.state.page } style={ styles.tabs } selectedStyle={ styles.selected } onSelect={ this._onSelect }>
               <Text name='all'>All</Text>
               <Text name='active'>Active</Text>
               <Text name='completed'>Completed</Text>

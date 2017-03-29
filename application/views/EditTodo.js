@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {StyleSheet, View, TextInput, Button} from 'react-native';
+import autobind from 'autobind-decorator';
 
 import {updateTodo} from '../store/todoActions';
 import {gotoHome} from '../store/navActions';
@@ -21,12 +22,14 @@ export class EditTodoComponent extends React.Component {
         };
     }
 
+    @autobind
     _onInputChanged(text) {
         this.setState({
             text
         });
     }
 
+    @autobind
     _onConfirmEdit() {
         if (!this.state.text) {
             return;
@@ -41,9 +44,9 @@ export class EditTodoComponent extends React.Component {
     render() {
         return (
             <View style={ styles.view }>
-              <TextInput style={ styles.input } placeholder='Type title for it' placeholderTextColor='#a9a9a9' value={ this.state.text } onChangeText={ this._onInputChanged.bind(this) }
+              <TextInput style={ styles.input } placeholder='Type title for it' placeholderTextColor='#a9a9a9' value={ this.state.text } onChangeText={ this._onInputChanged }
               />
-              <Button title='Confirm' onPress={ this._onConfirmEdit.bind(this) } />
+              <Button title='Confirm' onPress={ this._onConfirmEdit } />
             </View>
             );
     }

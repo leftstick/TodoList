@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {StyleSheet, View} from 'react-native';
+import autobind from 'autobind-decorator';
 
 import {TopActionBarComponent} from '../components/TopActionBar';
 import {TodoListComponent} from '../components/TodoList';
@@ -26,6 +27,7 @@ export class HomeComponent extends React.Component {
         this.props.dispatch(fetchTodos());
     }
 
+    @autobind
     _onAddTodo(text) {
         this.props.dispatch(addTodo({
             title: text,
@@ -33,6 +35,7 @@ export class HomeComponent extends React.Component {
         }));
     }
 
+    @autobind
     _onTodoCompleted(todo) {
         this.props.dispatch(updateTodo(todo.title, {
             title: todo.title,
@@ -40,18 +43,22 @@ export class HomeComponent extends React.Component {
         }));
     }
 
+    @autobind
     _onToggleAll(isAll) {
         this.props.dispatch(toggleAll(!isAll));
     }
 
+    @autobind
     _onFiltering(filter) {
         this.props.dispatch(changeFilter(filter));
     }
 
+    @autobind
     _goEdit(todo) {
         this.props.dispatch(gotoEdit(todo));
     }
 
+    @autobind
     _deleteTodo(todo) {
         this.props.dispatch(deleteTodo(todo));
     }
@@ -60,10 +67,10 @@ export class HomeComponent extends React.Component {
         const {todoList, loading, filter} = this.props.todo;
         return (
             <View style={ styles.mainContainer }>
-              <TopActionBarComponent list={ todoList } onAddTodo={ this._onAddTodo.bind(this) } onToggleAll={ this._onToggleAll.bind(this) } />
-              <TodoListComponent loading={ loading } list={ todoList } filter={ filter } onTodoCompleted={ this._onTodoCompleted.bind(this) } onTodoEdit={ this._goEdit.bind(this) }
-                onTodoDelete={ this._deleteTodo.bind(this) } />
-              <TodoFilterComponent loading={ loading } onSelect={ this._onFiltering.bind(this) } />
+              <TopActionBarComponent list={ todoList } onAddTodo={ this._onAddTodo } onToggleAll={ this._onToggleAll } />
+              <TodoListComponent loading={ loading } list={ todoList } filter={ filter } onTodoCompleted={ this._onTodoCompleted } onTodoEdit={ this._goEdit }
+                onTodoDelete={ this._deleteTodo } />
+              <TodoFilterComponent loading={ loading } onSelect={ this._onFiltering } />
             </View>
             );
     }

@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Button, TextInput} from 'react-native';
+import autobind from 'autobind-decorator';
 
 export class TopActionBarComponent extends React.Component {
 
@@ -11,12 +12,14 @@ export class TopActionBarComponent extends React.Component {
         };
     }
 
+    @autobind
     _onInputChanged(text) {
         this.setState({
             text
         });
     }
 
+    @autobind
     _onSubmit() {
         if (!this.state.text) {
             return;
@@ -27,6 +30,7 @@ export class TopActionBarComponent extends React.Component {
         });
     }
 
+    @autobind
     _onToggleAll() {
         if (!this.props.list.length) {
             return;
@@ -45,9 +49,9 @@ export class TopActionBarComponent extends React.Component {
     render() {
         return (
             <View style={ styles.view }>
-              <Button style={ styles.toggleBtn } title='All' color={ this._toggleBtnColor() } onPress={ this._onToggleAll.bind(this) } />
-              <TextInput style={ styles.todoInput } placeholder='What needs to be done?' placeholderTextColor='#a9a9a9' value={ this.state.text } onChangeText={ this._onInputChanged.bind(this) }
-                onEndEditing={ this._onSubmit.bind(this) } />
+              <Button style={ styles.toggleBtn } title='All' color={ this._toggleBtnColor() } onPress={ this._onToggleAll } />
+              <TextInput style={ styles.todoInput } placeholder='What needs to be done?' placeholderTextColor='#a9a9a9' value={ this.state.text } onChangeText={ this._onInputChanged }
+                onEndEditing={ this._onSubmit } />
             </View>
             );
     }
