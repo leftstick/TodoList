@@ -28,7 +28,11 @@ export class TopActionBarComponent extends React.Component {
     }
 
     _onToggleAll() {
-        this.props.onToggleAll();
+        if (!this.props.list.length) {
+            return;
+        }
+
+        this.props.onToggleAll(!this.props.list.some(t => !t.completed));
     }
 
     _toggleBtnColor() {

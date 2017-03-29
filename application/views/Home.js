@@ -1,13 +1,17 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {connect} from 'react-redux';
+import {StyleSheet, View} from 'react-native';
 
 import {TopActionBarComponent} from '../components/TopActionBar';
 import {TodoListComponent} from '../components/TodoList';
 import {TodoFilterComponent} from '../components/TodoFilter';
 
-import {getTodoList} from '../services/Todos';
+import {fetchTodos, addTodo, updateTodo, toggleLoading, deleteTodo, changeFilter, toggleAll} from '../store/todoActions';
+import {gotoEdit} from '../store/navActions';
 
-
+@connect(state => ({
+    todo: state.todo
+}))
 export class HomeComponent extends React.Component {
     static navigationOptions = {
         title: 'TodoList'
@@ -15,69 +19,51 @@ export class HomeComponent extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            inputTodo: '',
-            loading: false,
-            list: [],
-            filter: 'all'
-        };
     }
 
     componentDidMount() {
-        this.setState({
-            loading: true
-        });
-        getTodoList()
-            .then(list => {
-                this.setState({
-                    list,
-                    loading: false
-                });
-            });
+        this.props.dispatch(toggleLoading(true));
+        this.props.dispatch(fetchTodos());
     }
 
     _onAddTodo(text) {
-        this.setState({
-            list: [...this.state.list, {
-                title: text,
-                completed: false
-            }]
-        });
+        this.props.dispatch(addTodo({
+            title: text,
+            completed: false
+        }));
     }
 
     _onTodoCompleted(todo) {
-        this.setState({
-            list: this.state.list.map(t => {
-                if (t.title !== todo.title) {
-                    return t;
-                }
-                return {
-                    title: t.title,
-                    completed: !t.completed
-                };
-            })
-        });
+        this.props.dispatch(updateTodo(todo.title, {
+            title: todo.title,
+            completed: !todo.completed
+        }));
     }
 
-    _onToggleAll() {
-        console.log('toggle');
+    _onToggleAll(isAll) {
+        this.props.dispatch(toggleAll(!isAll));
     }
 
     _onFiltering(filter) {
-        this.setState({
-            filter
-        });
+        this.props.dispatch(changeFilter(filter));
+    }
+
+    _goEdit(todo) {
+        this.props.dispatch(gotoEdit(todo));
+    }
+
+    _deleteTodo(todo) {
+        this.props.dispatch(deleteTodo(todo));
     }
 
     render() {
-        // const {navigate} = this.props.navigation;
-        const {list} = this.state;
+        const {todoList, loading, filter} = this.props.todo;
         return (
             <View style={ styles.mainContainer }>
-              <TopActionBarComponent list={ list } onAddTodo={ this._onAddTodo.bind(this) } onToggleAll={ this._onToggleAll.bind(this) } />
-              <TodoListComponent loading={ this.state.loading } list={ list } filter={ this.state.filter } onTodoCompleted={ this._onTodoCompleted.bind(this) } />
-              <TodoFilterComponent loading={ this.state.loading } onSelect={ this._onFiltering.bind(this) } />
+              <TopActionBarComponent list={ todoList } onAddTodo={ this._onAddTodo.bind(this) } onToggleAll={ this._onToggleAll.bind(this) } />
+              <TodoListComponent loading={ loading } list={ todoList } filter={ filter } onTodoCompleted={ this._onTodoCompleted.bind(this) } onTodoEdit={ this._goEdit.bind(this) }
+                onTodoDelete={ this._deleteTodo.bind(this) } />
+              <TodoFilterComponent loading={ loading } onSelect={ this._onFiltering.bind(this) } />
             </View>
             );
     }

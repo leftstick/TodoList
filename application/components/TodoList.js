@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet, View, ActivityIndicator, ListView, Button} from 'react-native';
+import {StyleSheet, View, ActivityIndicator, ListView} from 'react-native';
 
 import CheckBox from 'react-native-checkbox';
+import Swipeout from 'react-native-swipe-out';
 
 
 export class TodoListComponent extends React.Component {
@@ -17,10 +18,31 @@ export class TodoListComponent extends React.Component {
         this.props.onTodoCompleted(todo);
     }
 
+    _getItemRightMenu(rowData) {
+        return [{
+            text: 'Edit',
+            type: 'primary',
+            onPress: () => {
+                this.props.onTodoEdit(rowData);
+            }
+        }, {
+            text: 'Delete',
+            backgroundColor: 'red',
+            onPress: () => {
+                this.props.onTodoDelete(rowData);
+            }
+        }];
+    }
+
     _listItem(rowData) {
-        return (<View style={ styles.item }>
-                  <CheckBox labelStyle={ styles.itemLabel } label={ rowData.title } checked={ rowData.completed } onChange={ () => this._onItemSelect(rowData) } />
-                </View>);
+
+        return (
+            <Swipeout right={ this._getItemRightMenu(rowData) } backgroundColor='transparent'>
+              <View style={ styles.item }>
+                <CheckBox labelStyle={ styles.itemLabel } label={ rowData.title } checked={ rowData.completed } onChange={ () => this._onItemSelect(rowData) } />
+              </View>
+            </Swipeout>
+            );
     }
 
     _getListWithFilter() {
@@ -50,7 +72,9 @@ TodoListComponent.propTypes = {
     loading: React.PropTypes.bool.isRequired,
     list: React.PropTypes.array.isRequired,
     filter: React.PropTypes.string.isRequired,
-    onTodoCompleted: React.PropTypes.func.isRequired
+    onTodoCompleted: React.PropTypes.func.isRequired,
+    onTodoEdit: React.PropTypes.func.isRequired,
+    onTodoDelete: React.PropTypes.func.isRequired
 };
 
 
@@ -66,7 +90,8 @@ const styles = StyleSheet.create({
     item: {
         flex: 0,
         flexDirection: 'row',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        marginBottom: 6
     },
     itemLabel: {
         width: '100%'
@@ -84,3 +109,4 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     }
 });
+
