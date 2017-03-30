@@ -3,8 +3,7 @@ import {connect} from 'react-redux';
 import {StyleSheet, View, TextInput, Button} from 'react-native';
 import autobind from 'autobind-decorator';
 
-import {updateTodo} from '../store/todoActions';
-import {gotoHome} from '../store/navActions';
+import {updateTodo, gotoHome} from '../redux/action';
 
 @connect(state => ({
     todo: state.todo

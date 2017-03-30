@@ -1,12 +1,11 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import {StackNavigationState} from './store';
-import {todoStore} from './store/reducer';
+import {StackNavigationState, store} from './redux';
 
 export class MainEntry extends React.Component {
     render() {
         return (
-            <Provider store={ todoStore }>
+            <Provider store={ store }>
               <StackNavigationState />
             </Provider>
         )

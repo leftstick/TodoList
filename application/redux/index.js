@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {addNavigationHelpers} from 'react-navigation';
-import {StackNavigation} from '../navigation';
 
+import {StackNavigation} from '../navigation';
 
 @connect(state => ({
     stackNav: state.stackNav
@@ -17,3 +17,5 @@ export class StackNavigationState extends React.Component {
             );
     }
 }
+
+export {store} from './store';

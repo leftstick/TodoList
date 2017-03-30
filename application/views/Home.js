@@ -7,8 +7,7 @@ import {TopActionBarComponent} from '../components/TopActionBar';
 import {TodoListComponent} from '../components/TodoList';
 import {TodoFilterComponent} from '../components/TodoFilter';
 
-import {fetchTodos, addTodo, updateTodo, toggleLoading, deleteTodo, changeFilter, toggleAll} from '../store/todoActions';
-import {gotoEdit} from '../store/navActions';
+import {fetchTodos, addTodo, updateTodo, toggleLoading, deleteTodo, changeFilter, toggleAll, gotoEdit} from '../redux/action';
 
 @connect(state => ({
     todo: state.todo
