@@ -5,9 +5,7 @@ import autobind from 'autobind-decorator';
 
 import {updateTodo, gotoHome} from '../redux/action';
 
-@connect(state => ({
-    todo: state.todo
-}))
+@connect()
 export class EditTodoComponent extends React.Component {
     static navigationOptions = {
         title: 'Edit'
