@@ -14,6 +14,12 @@ A demonstration of [react-native](http://facebook.github.io/react-native/) todo 
 
 See: [environment setup](http://facebook.github.io/react-native/docs/getting-started.html)
 
+### Install dependencies ###
+
+1. Open your preferred terminal tool, For example: [iterm2](https://www.iterm2.com/) 
+2. Goto `TodoList` folder
+3. Execute `npm install`
+
 ### Setup IDE ###
 
 1. Download [vscode](http://code.visualstudio.com/)
@@ -22,4 +28,12 @@ See: [environment setup](http://facebook.github.io/react-native/docs/getting-sta
 4. `reload` vscode
 5. Press `cmd + shift + d` to open `DEBUG` panel, you would see following debug option:
 
-![](https://raw.githubusercontent.com/leftstick/TodoList/master/docs/imgs/debug.png)x
+![](https://raw.githubusercontent.com/leftstick/TodoList/master/docs/imgs/debug.png)
+
+6. Now, click the green debug button and enjoy this tiny demo app
+
+
+## Further read ##
+
+1. [redux](http://redux.js.org/)
+2. [react-navigation](https://reactnavigation.org/)
