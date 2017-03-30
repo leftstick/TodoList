@@ -55205,8 +55205,8 @@ var TopActionBarComponent = exports.TopActionBarComponent = (_class = function (
                 _reactNative.View,
                 { style: styles.view },
                 _react2.default.createElement(_reactNative.Button, { style: styles.toggleBtn, title: 'All', color: this._toggleBtnColor(), onPress: this._onToggleAll }),
-                _react2.default.createElement(_reactNative.TextInput, { style: styles.todoInput, placeholder: 'What needs to be done?', placeholderTextColor: '#a9a9a9', value: this.state.text, onChangeText: this._onInputChanged,
-                    onEndEditing: this._onSubmit })
+                _react2.default.createElement(_reactNative.TextInput, { underlineColorAndroid: 'transparent', style: styles.todoInput, placeholder: 'What needs to be done?', placeholderTextColor: '#a9a9a9', value: this.state.text,
+                    onChangeText: this._onInputChanged, onEndEditing: this._onSubmit })
             );
         }
     }]);

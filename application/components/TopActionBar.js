@@ -50,8 +50,8 @@ export class TopActionBarComponent extends React.Component {
         return (
             <View style={ styles.view }>
               <Button style={ styles.toggleBtn } title='All' color={ this._toggleBtnColor() } onPress={ this._onToggleAll } />
-              <TextInput style={ styles.todoInput } placeholder='What needs to be done?' placeholderTextColor='#a9a9a9' value={ this.state.text } onChangeText={ this._onInputChanged }
-                onEndEditing={ this._onSubmit } />
+              <TextInput underlineColorAndroid='transparent' style={ styles.todoInput } placeholder='What needs to be done?' placeholderTextColor='#a9a9a9' value={ this.state.text }
+                onChangeText={ this._onInputChanged } onEndEditing={ this._onSubmit } />
             </View>
             );
     }
