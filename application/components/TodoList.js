@@ -6,7 +6,7 @@ import CheckBox from 'react-native-checkbox';
 import Swipeout from 'react-native-swipe-out';
 
 
-export class TodoListComponent extends React.Component {
+export class TodoList extends React.Component {
 
     constructor(props) {
         super(props);
@@ -70,7 +70,7 @@ export class TodoListComponent extends React.Component {
     }
 }
 
-TodoListComponent.propTypes = {
+TodoList.propTypes = {
     loading: React.PropTypes.bool.isRequired,
     list: React.PropTypes.array.isRequired,
     filter: React.PropTypes.string.isRequired,

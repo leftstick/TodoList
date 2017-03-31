@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Button, TextInput} from 'react-native';
 import autobind from 'autobind-decorator';
 
-export class TopActionBarComponent extends React.Component {
+export class TopActionBar extends React.Component {
 
     constructor(props) {
         super(props);
@@ -57,7 +57,7 @@ export class TopActionBarComponent extends React.Component {
     }
 }
 
-TopActionBarComponent.propTypes = {
+TopActionBar.propTypes = {
     onAddTodo: React.PropTypes.func.isRequired,
     onToggleAll: React.PropTypes.func.isRequired,
     list: React.PropTypes.array.isRequired

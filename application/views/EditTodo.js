@@ -6,7 +6,7 @@ import autobind from 'autobind-decorator';
 import {updateTodo, gotoHome} from '../redux/action';
 
 @connect()
-export class EditTodoComponent extends React.Component {
+export class EditTodoView extends React.Component {
     static navigationOptions = {
         title: 'Edit'
     };

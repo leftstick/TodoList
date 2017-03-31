@@ -1,13 +1,13 @@
 import {StackNavigator} from 'react-navigation';
 
-import {HomeComponent} from '../views/Home';
-import {EditTodoComponent} from '../views/EditTodo';
+import {HomeView} from '../views/Home';
+import {EditTodoView} from '../views/EditTodo';
 
 export const StackNavigation = StackNavigator({
     Home: {
-        screen: HomeComponent
+        screen: HomeView
     },
     EditTodo: {
-        screen: EditTodoComponent
+        screen: EditTodoView
     }
 });

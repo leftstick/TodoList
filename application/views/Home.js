@@ -3,16 +3,16 @@ import {connect} from 'react-redux';
 import {StyleSheet, View} from 'react-native';
 import autobind from 'autobind-decorator';
 
-import {TopActionBarComponent} from '../components/TopActionBar';
-import {TodoListComponent} from '../components/TodoList';
-import {TodoFilterComponent} from '../components/TodoFilter';
+import {TopActionBar} from '../components/TopActionBar';
+import {TodoList} from '../components/TodoList';
+import {TodoFilter} from '../components/TodoFilter';
 
 import {fetchTodos, addTodo, updateTodo, toggleLoading, deleteTodo, changeFilter, toggleAll, gotoEdit} from '../redux/action';
 
 @connect(state => ({
     todo: state.todo
 }))
-export class HomeComponent extends React.Component {
+export class HomeView extends React.Component {
     static navigationOptions = {
         title: 'TodoList'
     };
@@ -66,10 +66,10 @@ export class HomeComponent extends React.Component {
         const {todoList, loading, filter} = this.props.todo;
         return (
             <View style={ styles.mainContainer }>
-              <TopActionBarComponent list={ todoList } onAddTodo={ this._onAddTodo } onToggleAll={ this._onToggleAll } />
-              <TodoListComponent loading={ loading } list={ todoList } filter={ filter } onTodoCompleted={ this._onTodoCompleted } onTodoEdit={ this._goEdit }
+              <TopActionBar list={ todoList } onAddTodo={ this._onAddTodo } onToggleAll={ this._onToggleAll } />
+              <TodoList loading={ loading } list={ todoList } filter={ filter } onTodoCompleted={ this._onTodoCompleted } onTodoEdit={ this._goEdit }
                 onTodoDelete={ this._deleteTodo } />
-              <TodoFilterComponent loading={ loading } onSelect={ this._onFiltering } />
+              <TodoFilter loading={ loading } onSelect={ this._onFiltering } />
             </View>
             );
     }

@@ -5,7 +5,7 @@ import autobind from 'autobind-decorator';
 import Tabs from 'react-native-tabs';
 
 
-export class TodoFilterComponent extends React.Component {
+export class TodoFilter extends React.Component {
 
     constructor(props) {
         super(props);
@@ -36,7 +36,7 @@ export class TodoFilterComponent extends React.Component {
     }
 }
 
-TodoFilterComponent.propTypes = {
+TodoFilter.propTypes = {
     loading: React.PropTypes.bool.isRequired,
     onSelect: React.PropTypes.func.isRequired
 };
