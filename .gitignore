@@ -54,3 +54,4 @@ fastlane/screenshots
 
 #vscode
 .vscode/.react/index.ios*
+.vscode/.react/index.android*
